@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Weather = (props) =>{
+const WeatherF = (props) =>{
   return (
     <div className="container">
       <div className="cards pt-4">
@@ -9,7 +9,7 @@ const Weather = (props) =>{
         <h5 className="py-4">
           <i className={`wi ${props.weatherIcon} display-1`}></i>
         </h5>
-        {props.temp_celsius ? (<h1 className="py-2">{props.temp_celsius}&deg;</h1>) : null}
+        {props.temp_fahrenheit ? (<h1 className="py-2">{props.temp_fahrenheit}&deg;</h1>) : null}
 
         {/** show max and min temp */}
         {minmaxTemp(props.temp_min,props.temp_max)}
@@ -35,4 +35,4 @@ function minmaxTemp(min,max) {
   }
 }
 
-export default Weather
+export default WeatherF

@@ -1,6 +1,8 @@
 import './App.css';
 import Weather from './app_component/weather.component'
+import WeatherF from './app_component/weatherF.component';
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'weather-icons/css/weather-icons.css'
 import Form from './app_component/form.component'
@@ -16,8 +18,11 @@ class App extends React.Component {
       icon: undefined,
       main: undefined,
       celsius: undefined,
-      temp_max: undefined,
-      temp_min: undefined,
+      fahrenheit: undefined,
+      temp_max_c: undefined,
+      temp_min_c: undefined,
+      temp_max_f: undefined,
+      temp_min_f: undefined,
       description:"",
       error: false,
     };
@@ -35,6 +40,11 @@ class App extends React.Component {
   calCelsius(temp) {
     let cel = Math.floor(temp - 273.15)
     return cel
+  }
+
+  calFahrenheit(temp) {
+    let fah = Math.floor((temp - 273.15) * 9/5 + 32)
+    return fah
   }
 
   get_WeatherIcon(icons, rangeId) {
@@ -79,8 +89,11 @@ class App extends React.Component {
       this.setState({
       city: `${response.name}, ${response.sys.country}`,
       celsius: this.calCelsius(response.main.temp),
-      temp_max: this.calCelsius(response.main.temp_max),
-      temp_min: this.calCelsius(response.main.temp_min),
+      fahrenheit: this.calFahrenheit(response.main.temp),
+      temp_max_c: this.calCelsius(response.main.temp_max),
+      temp_min_c: this.calCelsius(response.main.temp_min),
+      temp_max_f: this.calFahrenheit(response.main.temp_max),
+      temp_min_f: this.calFahrenheit(response.main.temp_min),
       description: response.weather[0].description,
       
     })
@@ -92,17 +105,35 @@ class App extends React.Component {
 
   render() {
     return(
+    <Router>
     <div className="App">
       <Form loadweather = {this.getWeather} error={this.state.error}/>
-      <Weather 
-      city={this.state.city} 
-      country={this.state.country} 
-      temp_celsius={this.state.celsius} 
-      temp_max={this.state.temp_max}
-      temp_min={this.state.temp_min}
-      description={this.state.description}
-      weatherIcon={this.state.icon}/>
+      <Switch>
+        <Route exact path='/'>
+          <WeatherF 
+            city={this.state.city} 
+            country={this.state.country} 
+            temp_celsius={this.state.celsius}
+            temp_fahrenheit={this.state.fahrenheit} 
+            temp_max={this.state.temp_max_f}
+            temp_min={this.state.temp_min_f}
+            description={this.state.description}
+            weatherIcon={this.state.icon}/>
+        </Route>
+        <Route exact path='/celsius'>
+          <Weather 
+            city={this.state.city} 
+            country={this.state.country} 
+            temp_celsius={this.state.celsius}
+            temp_fahrenheit={this.state.fahrenheit} 
+            temp_max={this.state.temp_max_c}
+            temp_min={this.state.temp_min_c}
+            description={this.state.description}
+            weatherIcon={this.state.icon}/>
+        </Route>
+      </Switch>
     </div>
+    </Router>
     );
   }
 }
