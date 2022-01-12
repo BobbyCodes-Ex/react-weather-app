@@ -5,17 +5,17 @@ const Form = props => {
   return(
     <div className="container">
       <div>{props.error? error() : null}</div>
-      <form onSubmit={props.loadweather}>
+      <form onSubmit={props.loadweather} className="text-center">
         <div className="row">
-          <div className="col-md-3">
-            <input type="text" className="form-control offset-md-2" name='city' autoComplete='off' placeholder="City"/>
+          <div className="col-lg-6">
+            <input type="text" className="form-control " name='city' autoComplete='off' placeholder="City"/>
           </div>
-          <div className="col-md-3">
-            <input type="text" className="form-control" name='country' autoComplete="off" placeholder="Country"/>
+          <div className="col-lg-6">
+            <input type="text" className="form-control " name='country' autoComplete="off" placeholder="Country"/>
           </div>
-          <div className="col-md-3 mt-md-0 text-md-left">
-            <button className="btn btn-warning">Get Weather</button>
-          </div>
+        </div>
+        <div className="mt-4">
+          <button className="btn btn-warning">Get Weather</button>
         </div>
       </form>
     </div>

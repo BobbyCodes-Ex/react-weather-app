@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('./app_component/luke-chesser-eICUFSeirc0-unsplash.jpg');
+  background-size: ;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
 }
 
 code {
